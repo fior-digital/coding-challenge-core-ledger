@@ -13,7 +13,7 @@ export function Bus({ stack }: StackContext) {
   bus.subscribe("user.created", {
     bind: [db],
     handler:
-      "packages/functions/src/modules/notification/user-created.event-handler.handler",
+      "packages/functions/src/modules/notification/user-created.event-handler.userCreatedEventHandler",
   });
 
   stack.addOutputs({
