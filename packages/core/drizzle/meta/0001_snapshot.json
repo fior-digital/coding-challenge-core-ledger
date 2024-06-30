@@ -1,0 +1,325 @@
+{
+  "id": "15585cb8-5b8d-4c15-8ff8-0e16f2d5fdde",
+  "prevId": "90feb723-a43f-4982-9008-7a6a216570c0",
+  "version": "6",
+  "dialect": "postgresql",
+  "tables": {
+    "user.users": {
+      "name": "users",
+      "schema": "user",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "firstName": {
+          "name": "firstName",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lastName": {
+          "name": "lastName",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user.accounts": {
+      "name": "accounts",
+      "schema": "user",
+      "columns": {
+        "accountId": {
+          "name": "accountId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "currencyCode": {
+          "name": "currencyCode",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fiatBalance": {
+          "name": "fiatBalance",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "bitcoinBalance": {
+          "name": "bitcoinBalance",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "accounts_userId_users_id_fk": {
+          "name": "accounts_userId_users_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "users",
+          "schemaTo": "user",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user.transactions": {
+      "name": "transactions",
+      "schema": "user",
+      "columns": {
+        "transactionId": {
+          "name": "transactionId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "accountId": {
+          "name": "accountId",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "currencyCode": {
+          "name": "currencyCode",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fee": {
+          "name": "fee",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "transactionDate": {
+          "name": "transactionDate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "transactions_accountId_accounts_accountId_fk": {
+          "name": "transactions_accountId_accounts_accountId_fk",
+          "tableFrom": "transactions",
+          "tableTo": "accounts",
+          "schemaTo": "user",
+          "columnsFrom": [
+            "accountId"
+          ],
+          "columnsTo": [
+            "accountId"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user.ledgerentries": {
+      "name": "ledgerentries",
+      "schema": "user",
+      "columns": {
+        "entryId": {
+          "name": "entryId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "transactionId": {
+          "name": "transactionId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "accountId": {
+          "name": "accountId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "debit": {
+          "name": "debit",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "credit": {
+          "name": "credit",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "balance": {
+          "name": "balance",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "entryDate": {
+          "name": "entryDate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ledgerentries_transactionId_transactions_transactionId_fk": {
+          "name": "ledgerentries_transactionId_transactions_transactionId_fk",
+          "tableFrom": "ledgerentries",
+          "tableTo": "transactions",
+          "schemaTo": "user",
+          "columnsFrom": [
+            "transactionId"
+          ],
+          "columnsTo": [
+            "transactionId"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ledgerentries_accountId_accounts_accountId_fk": {
+          "name": "ledgerentries_accountId_accounts_accountId_fk",
+          "tableFrom": "ledgerentries",
+          "tableTo": "accounts",
+          "schemaTo": "user",
+          "columnsFrom": [
+            "accountId"
+          ],
+          "columnsTo": [
+            "accountId"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user.companyaccount": {
+      "name": "companyaccount",
+      "schema": "user",
+      "columns": {
+        "companyAccountId": {
+          "name": "companyAccountId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "currencyCode": {
+          "name": "currencyCode",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fiatBalance": {
+          "name": "fiatBalance",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "bitcoinBalance": {
+          "name": "bitcoinBalance",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "lastUpdated": {
+          "name": "lastUpdated",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {
+    "user": "user"
+  },
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
