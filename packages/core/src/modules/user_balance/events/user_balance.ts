@@ -6,16 +6,14 @@ export const UserBalanceEvents = {
     "userBalance.created",
     z.object({
       id: z.string(),
-      inEur: z.number(),
-      inUSD: z.number(),
+      balance: z.number()
     })
   ),
   Updated: event(
     "userBalance.updated",
     z.object({
       id: z.string(),
-      inEur: z.number(),
-      inUSD: z.number(),
+      balance: z.number()
     })
   )
 };

@@ -29,6 +29,20 @@
       "when": 1719750361811,
       "tag": "0003_lumpy_hemingway",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1719863379284,
+      "tag": "0004_simple_power_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1719866644722,
+      "tag": "0005_futuristic_celestials",
+      "breakpoints": true
     }
   ]
 }

@@ -24,6 +24,18 @@ export function Api({ stack }: StackContext) {
         "packages/functions/src/modules/transaction/transaction.api-handler.getUserTransactions",
       "POST /transaction/withdrawal":
         "packages/functions/src/modules/transaction/transaction.api-handler.withdrawBalance",
+      "POST /transaction/deposit":
+        "packages/functions/src/modules/transaction/transaction.api-handler.depositBalance",
+
+
+      "GET /currency/{id}":
+        "packages/functions/src/modules/user/currency.api-handler.get",
+      "GET /currency/{code}":
+        "packages/functions/src/modules/user/currency.api-handler.getByCode",
+      "GET /currencies}":
+        "packages/functions/src/modules/user/currency.api-handler.getAll",
+      "POST /currency":
+        "packages/functions/src/modules/user/currency.api-handler.create",
     },
   });
 

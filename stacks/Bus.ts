@@ -13,7 +13,6 @@ export function Bus({ stack }: StackContext) {
   bus.subscribe("user.created", {
     bind: [db],
     handler:
-      "packages/functions/src/modules/notification/user-created.event-handler.userCreatedEventHandler",
       "packages/functions/src/modules/notification/user.event-handler.userCreatedEventHandler",
   });
 
@@ -39,6 +38,12 @@ export function Bus({ stack }: StackContext) {
     bind: [db],
     handler:
       "packages/functions/src/modules/notification/withdraw.event-handler.withdrawCreatedEventHandler",
+  });
+
+  bus.subscribe("currency.created", {
+    bind: [db],
+    handler:
+      "packages/functions/src/modules/notification/currency.event-handler.currencyCreatedEventHandler",
   });
 
   stack.addOutputs({
