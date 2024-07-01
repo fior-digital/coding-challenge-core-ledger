@@ -18,9 +18,11 @@ export function Api({ stack }: StackContext) {
         "packages/functions/src/modules/user/user.api-handler.get",
       "POST /user":
         "packages/functions/src/modules/user/user.api-handler.create",
-      "GET /user/transaction/{id}":
+      "GET /user/balance/{id}":
+        "packages/functions/src/modules/user/user.api-handler.getUserBalance",
+      "GET /transactions/{userId}":
         "packages/functions/src/modules/transaction/transaction.api-handler.getUserTransactions",
-      "POST /withdrawal":
+      "POST /transaction/withdrawal":
         "packages/functions/src/modules/transaction/transaction.api-handler.withdrawBalance",
     },
   });

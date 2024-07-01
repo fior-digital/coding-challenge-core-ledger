@@ -1,4 +1,5 @@
 import { UserManager } from "@coding-challenge-core-ledger/core/modules/user";
+import { UserBalanceManager } from "@coding-challenge-core-ledger/core/modules/user_balance";
 import { ApiHandler, usePathParams } from "sst/node/api";
 
 export const get = ApiHandler(async (_evt) => {
@@ -20,3 +21,16 @@ export const create = ApiHandler(async (_evt) => {
     body: JSON.stringify(item),
   };
 });
+
+export const getUserBalance = ApiHandler(async (_evt) => {
+  const params = usePathParams();
+  if (!params.id) return { statusCode: 400 };
+  const userBalance = await UserBalanceManager.getByUserId(params.id);
+  return {
+    statusCode: 200,
+    body: JSON.stringify(userBalance),
+  };
+});
+
+
+
